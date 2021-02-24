@@ -10,7 +10,6 @@ jobs:
         with:
           node-version: '12'
       - run: npm install
-      - run: m[, o]
       - name: Tests ✅
         if: ${{ success() }}
         run: |
