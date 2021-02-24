@@ -1,11 +1,11 @@
 {
   "name": "@cobalt-intelligence/sos-search-common",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Home for common functions and models for sos-search.",
   "main": "./dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build && npm --no-git-tag-version version patch",
     "test": "jest"
   },
   "repository": {

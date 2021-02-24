@@ -1,12 +1,14 @@
 export interface IBusiness {
-    title: string;
-    filingDate: string;
-    state: States;
-    status: string;
-    agentName: string;
-    agentCity: string;
-    agentState: States;
-    agentZip: string;
+    title?: string;
+    filingDate?: string;
+    stateOfFormation?: States;
+    stateOfSosRegistration?: States;
+    status?: string;
+    agentName?: string;
+    agentCity?: string;
+    agentState?: States;
+    agentZip?: string;
+    agentStreetAddress?: string;
     physicalAddress?: string;
     mailingAddress?: string;
     entityType?: string;
@@ -18,9 +20,54 @@ export interface IBusiness {
 };
 
 export enum States {
-    'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
-    'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA',
-    'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
-    'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-    'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'
+    'AL' = 'AL', 
+    'AK' = 'AK', 
+    'AZ' = 'AZ', 
+    'AR' = 'AR', 
+    'CA' = 'CA', 
+    'CO' = 'CO', 
+    'CT' = 'CT', 
+    'DE' = 'DE', 
+    'FL' = 'FL', 
+    'GA' = 'GA',
+    'HI' = 'HI', 
+    'ID' = 'ID', 
+    'IL' = 'IL', 
+    'IN' = 'IN', 
+    'IA' = 'IA', 
+    'KS' = 'KS', 
+    'KY' = 'KY', 
+    'LA' = 'LA', 
+    'ME' = 'ME', 
+    'MD' = 'MD', 
+    'MA' = 'MA',
+    'MI' = 'MI', 
+    'MN' = 'MN', 
+    'MS' = 'MS', 
+    'MO' = 'MO', 
+    'MT' = 'MT', 
+    'NE' = 'NE', 
+    'NV' = 'NV', 
+    'NH' = 'NH', 
+    'NJ' = 'NJ', 
+    'NM' = 'NM', 
+    'NY' = 'NY', 
+    'NC' = 'NC', 
+    'ND' = 'ND',
+    'OH' = 'OH', 
+    'OK' = 'OK', 
+    'OR' = 'OR', 
+    'PA' = 'PA', 
+    'RI' = 'RI', 
+    'SC' = 'SC', 
+    'SD' = 'SD', 
+    'TN' = 'TN', 
+    'TX' = 'TX', 
+    'UT' = 'UT',
+    'VT' = 'VT', 
+    'VA' = 'VA', 
+    'WA' = 'WA', 
+    'WV' = 'WV', 
+    'WI' = 'WI', 
+    'WY' = 'WY'
 };
