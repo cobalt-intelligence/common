@@ -17,6 +17,7 @@ export interface IBusiness {
     agentIsCommercial?: boolean;
     url?: string;
     industry?: string;
+    sosId?: string;
 };
 
 export enum States {
