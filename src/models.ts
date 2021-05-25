@@ -9,8 +9,22 @@ export interface IBusiness {
     agentState?: States;
     agentZip?: string;
     agentStreetAddress?: string;
+    /**
+     * @deprecated This will be removed.
+     */
     physicalAddress?: string;
+    physicalAddressStreet?: string;
+    physicalAddressCity?: string;
+    physicalAddressState?: string;
+    physicalAddressZip?: string;    
+    /**
+     * @deprecated This will be removed.
+     */
     mailingAddress?: string;
+    mailingAddressStreet?: string;
+    mailingAddressCity?: string;
+    mailingAddressState?: string;
+    mailingAddressZip?: string;
     entityType?: string;
     phoneNumber?: string;
     email?: string;
