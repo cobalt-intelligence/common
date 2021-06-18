@@ -25,6 +25,10 @@ export interface IBusiness {
     mailingAddressCity?: string;
     mailingAddressState?: string;
     mailingAddressZip?: string;
+    stateAddressStreet?: string;
+    stateAddressCity?: string;
+    stateAddressState?: string;
+    stateAddressZip?: string;
     entityType?: string;
     phoneNumber?: string;
     email?: string;

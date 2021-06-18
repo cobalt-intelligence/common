@@ -1,6 +1,6 @@
 {
   "name": "@cobalt-intelligence/sos-search-common",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Home for common functions and models for sos-search.",
   "main": "./dist/index.js",
   "scripts": {
