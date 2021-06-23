@@ -36,6 +36,10 @@ export interface IBusiness {
     url?: string;
     industry?: string;
     sosId?: string;
+    /**
+     * Used by Texas
+     */
+    taxPayerNumber?: string;
 };
 
 export enum States {
