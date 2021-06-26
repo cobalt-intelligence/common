@@ -1,3 +1,6 @@
+/**
+ * This is the format of data returned from sos-search
+ */
 export interface IBusiness {
     title?: string;
     filingDate?: string;
@@ -41,6 +44,44 @@ export interface IBusiness {
      */
     taxPayerNumber?: string;
 };
+
+/**
+ * This is the data structure used in delinquent-property-tax in Dynamodb
+ */
+export interface IParcel {
+    taxAccountNumber?: string;
+    legalDescription?: string;
+    propertyStreet?: string;
+    propertyCity?: string;
+    propertyState?: string;    
+    propertyZip?: string;
+    ownerName1FirstName?: string;
+    ownerName1LastName?: string;
+    ownerName2FirstName?: string;
+    ownerName2LastName?: string;
+    ownerStreet?: string;
+    ownerCity?: string;
+    ownerState?: string;
+    ownerZip?: string;
+    delinquencyDate?: string;
+    amountDue2020?: number;
+    amountDue2019?: number;
+    amountDue2018?: number;
+    amountDue2017?: number;
+    amountDue2016?: number;
+    totalDue?: number;
+    assessorUrl?: string;
+    presentUse?: string;
+	county?: string;
+	state?: string;
+}
+
+export interface IAddress {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+}
 
 export enum States {
     'AL' = 'AL', 

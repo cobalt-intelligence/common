@@ -1,6 +1,7 @@
-import { States } from './models';
+import { IAddress, States } from './models';
+import axios from 'axios';
 
-export { States, IBusiness } from './models';
+export { IBusiness, IParcel, States, IAddress } from './models';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
 // I know you're looking at that empty replace thinking, what the heck? Why is that there? Do NOT remove it.
 // It's removing invisible delimiters. You can't see them. Invisible.
@@ -172,4 +173,98 @@ export function abbreviateState(stateOrAbbreviation: string): States {
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'wyoming' || stateOrAbbreviation.toLocaleLowerCase() === 'wy') {
         return States.WY;
     }
+}
+
+/**
+ * Uses Google's API to return a valid address. 
+ * Using somme kind of public api key
+ * @param address 
+ * @returns Promise<IAddress>
+ */
+export async function validateAddress(address: string): Promise<IAddress> {
+    console.log('Validating address', address);
+
+    const addressObject: IAddress = {
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+    };
+
+    if (address) {
+        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(address)}&key=AIzaSyCAGeDw74gSANE8JVNmEKOxjB8hEo54OZ4`;
+
+        const axiosResponse = await axios.get(url);
+        if (axiosResponse.data.results[0]) {
+            const splitAddress = axiosResponse.data.results[0].formatted_address.split(',');
+            const stateAndZip = splitAddress[splitAddress.length - 2]?.trim();
+            addressObject.state = stateAndZip.trim().split(' ')[0];
+            addressObject.zip = stateAndZip.trim().split(' ')[1];
+
+            addressObject.city = splitAddress[splitAddress.length - 3]?.trim();
+            addressObject.street = splitAddress[splitAddress.length - 4]?.trim();
+
+            return addressObject;
+        }
+        else {
+            console.log('Url when no results are returned', url);
+        }
+    }
+
+    return addressObject;
+}
+
+/**
+ * This checks whether the name appears to be a business or entity
+ * and parses rotates first and last name when needed.
+ * 
+ * @param name Something like 'Hansen Jordan'
+ * @returns { firstName: string; lastName: string}
+ */
+export function parseName(name: string) {
+    const formattedNames = {
+        firstName: '',
+        lastName: ''
+    };
+
+    if (name.toLocaleLowerCase().includes('trust')
+        || name.toLocaleLowerCase().includes('llc')
+        || name.toLocaleLowerCase().includes('inc')
+        || name.toLocaleLowerCase().includes('ltd')
+        || name.toLocaleLowerCase().includes('llp')
+        || name.toLocaleLowerCase().includes('estate')
+        || name.toLocaleLowerCase().includes('family')
+        || name.toLocaleLowerCase().includes('%')
+        || name.toLocaleLowerCase().includes('&')
+        || name.toLocaleLowerCase().includes(' and ')
+        || name.toLocaleLowerCase().includes('heir')
+        || name.toLocaleLowerCase().includes(' aka ')
+        || name.toLocaleLowerCase().includes(' att ')
+        || name.toLocaleLowerCase().includes('c/o')
+        || name.toLocaleLowerCase().includes('attn')
+        || name.toLocaleLowerCase().includes('dba')
+        || name.toLocaleLowerCase().includes('invest')) {
+        formattedNames.firstName = name;
+
+        return formattedNames;
+    }
+    else {
+        if (name.includes(',')) {
+            console.log('This name includes a comma. Removing all commas.', name);
+
+            name = name.replace(/,/g, '');
+        }
+
+        const names = name.trim().split(' ');
+        formattedNames.lastName = names[0];
+        names.shift()
+
+        formattedNames.firstName = names.join(' ').trim();
+    }
+    return formattedNames;
+
+}
+
+export function timeout(ms: number): Promise<NodeJS.Timeout> {
+    return new Promise((res) => setTimeout(res, ms));
 }
