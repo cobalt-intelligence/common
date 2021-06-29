@@ -1,5 +1,4 @@
-import { IAddress, States } from './models';
-import axios from 'axios';
+import { States } from './models';
 
 export { IBusiness, IParcel, States, IAddress } from './models';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
