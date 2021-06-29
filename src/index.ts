@@ -176,45 +176,6 @@ export function abbreviateState(stateOrAbbreviation: string): States {
 }
 
 /**
- * Uses Google's API to return a valid address. 
- * Using somme kind of public api key
- * @param address 
- * @returns Promise<IAddress>
- */
-export async function validateAddress(address: string): Promise<IAddress> {
-    console.log('Validating address', address);
-
-    const addressObject: IAddress = {
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
-    };
-
-    if (address) {
-        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(address)}&key=AIzaSyCAGeDw74gSANE8JVNmEKOxjB8hEo54OZ4`;
-
-        const axiosResponse = await axios.get(url);
-        if (axiosResponse.data.results[0]) {
-            const splitAddress = axiosResponse.data.results[0].formatted_address.split(',');
-            const stateAndZip = splitAddress[splitAddress.length - 2]?.trim();
-            addressObject.state = stateAndZip.trim().split(' ')[0];
-            addressObject.zip = stateAndZip.trim().split(' ')[1];
-
-            addressObject.city = splitAddress[splitAddress.length - 3]?.trim();
-            addressObject.street = splitAddress[splitAddress.length - 4]?.trim();
-
-            return addressObject;
-        }
-        else {
-            console.log('Url when no results are returned', url);
-        }
-    }
-
-    return addressObject;
-}
-
-/**
  * This checks whether the name appears to be a business or entity
  * and parses rotates first and last name when needed.
  * 

@@ -1,6 +1,6 @@
 {
   "name": "@cobalt-intelligence/common",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Home for common functions and models of Cobalt Intelligence.",
   "main": "./dist/index.js",
   "scripts": {
