@@ -59,6 +59,14 @@ export interface IParcel {
     ownerName1LastName?: string;
     ownerName2FirstName?: string;
     ownerName2LastName?: string;
+    /**
+     * Useful if current owner is a trust or estate
+     */
+    previousOwnerFirstName?: string;
+    /**
+     * Useful if current owner is a trust or estate
+     */
+    previousOwnerLastName?: string;
     ownerStreet?: string;
     ownerCity?: string;
     ownerState?: string;
