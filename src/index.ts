@@ -1,6 +1,6 @@
 import { States } from './models';
 
-export { IBusiness, IParcel, States, IAddress } from './models';
+export { IBusiness, IParcel, States, IAddress, PropertyUses } from './models';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
 // I know you're looking at that empty replace thinking, what the heck? Why is that there? Do NOT remove it.
 // It's removing invisible delimiters. You can't see them. Invisible.
@@ -175,54 +175,44 @@ export function abbreviateState(stateOrAbbreviation: string): States {
 }
 
 /**
- * This checks whether the name appears to be a business or entity
- * and parses rotates first and last name when needed.
+ * This will return true if the name contains words that indicate it is a business.
  * 
- * @param name Something like 'Hansen Jordan'
- * @returns { firstName: string; lastName: string}
+ * @param name string Name of thing to check for business
+ * @returns boolean
  */
-export function parseName(name: string) {
-    const formattedNames = {
-        firstName: '',
-        lastName: ''
-    };
-
+export function isBusinessCheck(name: string) {
     if (name.toLocaleLowerCase().includes('trust')
-        || name.toLocaleLowerCase().includes('llc')
-        || name.toLocaleLowerCase().includes('inc')
-        || name.toLocaleLowerCase().includes('ltd')
-        || name.toLocaleLowerCase().includes('llp')
-        || name.toLocaleLowerCase().includes('estate')
-        || name.toLocaleLowerCase().includes('family')
-        || name.toLocaleLowerCase().includes('%')
-        || name.toLocaleLowerCase().includes('&')
-        || name.toLocaleLowerCase().includes(' and ')
-        || name.toLocaleLowerCase().includes('heir')
-        || name.toLocaleLowerCase().includes(' aka ')
-        || name.toLocaleLowerCase().includes(' att ')
-        || name.toLocaleLowerCase().includes('c/o')
-        || name.toLocaleLowerCase().includes('attn')
-        || name.toLocaleLowerCase().includes('dba')
-        || name.toLocaleLowerCase().includes('invest')) {
-        formattedNames.firstName = name;
-
-        return formattedNames;
+    || name.toLocaleLowerCase().includes('llc')
+    || name.toLocaleLowerCase().includes('inc')
+    || name.toLocaleLowerCase().includes('ltd')
+    || name.toLocaleLowerCase().includes('llp')
+    || name.toLocaleLowerCase().includes('estate')
+    || name.toLocaleLowerCase().includes('family')
+    || name.toLocaleLowerCase().includes('%')
+    || name.toLocaleLowerCase().includes('&')
+    || name.toLocaleLowerCase().includes(' and ')
+    || name.toLocaleLowerCase().includes('heir')
+    || name.toLocaleLowerCase().includes(' aka ')
+    || name.toLocaleLowerCase().includes(' att ')
+    || name.toLocaleLowerCase().includes('c/o')
+    || name.toLocaleLowerCase().includes('attn')
+    || name.toLocaleLowerCase().includes('dba')
+    || name.toLocaleLowerCase().includes('invest')
+    || name.toLocaleLowerCase().includes('express')
+    || name.toLocaleLowerCase().includes('employment')
+    || name.toLocaleLowerCase().includes('#')
+    || name.toLocaleLowerCase().includes('corporation')
+    || name.toLocaleLowerCase().includes('studio')
+    || name.toLocaleLowerCase().includes('bank')
+    || name.toLocaleLowerCase().includes('corp')
+    || name.toLocaleLowerCase().includes('university')
+    || name.toLocaleLowerCase().includes('city')
+    || name.toLocaleLowerCase().includes('county')) {
+        return true;
     }
     else {
-        if (name.includes(',')) {
-            console.log('This name includes a comma. Removing all commas.', name);
-
-            name = name.replace(/,/g, '');
-        }
-
-        const names = name.trim().split(' ');
-        formattedNames.lastName = names[0];
-        names.shift()
-
-        formattedNames.firstName = names.join(' ').trim();
+        false;
     }
-    return formattedNames;
-
 }
 
 export function timeout(ms: number): Promise<NodeJS.Timeout> {

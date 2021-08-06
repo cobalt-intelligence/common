@@ -71,9 +71,10 @@ export interface IParcel {
     amountDue2016?: number;
     totalDue?: number;
     assessorUrl?: string;
-    presentUse?: string;
+    presentUse?: PropertyUses;
 	county?: string;
 	state?: string;
+    landSqFoot?: string;
 }
 
 export interface IAddress {
@@ -81,6 +82,13 @@ export interface IAddress {
     city: string;
     state: string;
     zip: string;
+}
+
+export enum PropertyUses {
+    'SFR' = 'SFR',
+    'MFR' = 'MFR',
+    'Vacant' = 'Vacant',
+    'Commercial' = 'Commercial'
 }
 
 export enum States {

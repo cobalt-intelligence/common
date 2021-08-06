@@ -1,4 +1,4 @@
-import { abbreviateState, formatBusinessName, parseName } from '.';
+import { abbreviateState, formatBusinessName } from '.';
 import { States } from './models';
 
 describe('abbreviateState()', () => {
@@ -40,27 +40,5 @@ describe('formatBusinessName()', () => {
 
     it('should return null if a falsey business name is passed in', () => {
         expect(formatBusinessName('')).toBe(null);
-    });
-});
-
-describe('parseName()', () => {
-    it('should correctly parse "Hansen Jordan"', () => {
-        expect(parseName('Hansen Jordan')).toEqual({ firstName: 'Jordan', lastName: 'Hansen' });
-    });
-
-    it('should correctly parse "Hansen Jordan Burke"', () => {
-        expect(parseName('Hansen Jordan Burke')).toEqual({ firstName: 'Jordan Burke', lastName: 'Hansen' });
-    });
-    
-    it('should correctly parse "Hansen Jordan Burke    "', () => {
-        expect(parseName('Hansen Jordan Burke    ')).toEqual({ firstName: 'Jordan Burke', lastName: 'Hansen' });
-    });
-    
-    it('should correctly parse "Hansen, Jordan"', () => {
-        expect(parseName('Hansen, Jordan')).toEqual({ firstName: 'Jordan', lastName: 'Hansen' });
-    });
-    
-    it('should correctly parse "Aarmora LLC"', () => {
-        expect(parseName('Aarmora LLC')).toEqual({ firstName: 'Aarmora LLC', lastName: '' });
     });
 });
