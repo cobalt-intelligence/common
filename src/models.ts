@@ -83,6 +83,7 @@ export interface IParcel {
 	county?: string;
 	state?: string;
     landSqFoot?: string;
+    appraisedValue?: number;
 }
 
 export interface IAddress {
