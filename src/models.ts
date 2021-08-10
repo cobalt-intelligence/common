@@ -49,7 +49,7 @@ export interface IBusiness {
  * This is the data structure used in delinquent-property-tax in Dynamodb
  */
 export interface IParcel {
-    taxAccountNumber?: string;
+    parcelNumber?: string;
     legalDescription?: string;
     propertyStreet?: string;
     propertyCity?: string;
