@@ -12,18 +12,10 @@ export interface IBusiness {
     agentState?: States;
     agentZip?: string;
     agentStreetAddress?: string;
-    /**
-     * @deprecated This will be removed.
-     */
-    physicalAddress?: string;
     physicalAddressStreet?: string;
     physicalAddressCity?: string;
     physicalAddressState?: string;
     physicalAddressZip?: string;    
-    /**
-     * @deprecated This will be removed.
-     */
-    mailingAddress?: string;
     mailingAddressStreet?: string;
     mailingAddressCity?: string;
     mailingAddressState?: string;
@@ -43,7 +35,26 @@ export interface IBusiness {
      * Used by Texas
      */
     taxPayerNumber?: string;
+    officers?: IOfficer[];
+    documents?: IDocument[];
 };
+
+interface IOfficer {
+    name: string;
+    title?: string;
+    streetAddress?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    phone?: string;
+    email?: string;
+    current?: string;
+}
+
+interface IDocument {
+    name: string;
+    url: string;
+}
 
 /**
  * This is the data structure used in delinquent-property-tax in Dynamodb
