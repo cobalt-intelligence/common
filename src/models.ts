@@ -39,7 +39,7 @@ export interface IBusiness {
     documents?: IDocument[];
 };
 
-interface IOfficer {
+export interface IOfficer {
     name: string;
     title?: string;
     streetAddress?: string;
@@ -51,7 +51,7 @@ interface IOfficer {
     current?: string;
 }
 
-interface IDocument {
+export interface IDocument {
     name: string;
     url: string;
 }
