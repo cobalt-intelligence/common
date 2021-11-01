@@ -54,6 +54,7 @@ export interface IOfficer {
 export interface IDocument {
     name: string;
     url: string;
+    date?: string;
 }
 
 /**
