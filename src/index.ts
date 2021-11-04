@@ -21,6 +21,9 @@ export function formatBusinessName(businessName: string) {
  * @param stateOrAbbreviation Can be a state, such as "Idaho" or abbreviation, such as "ID"
  */
 export function abbreviateState(stateOrAbbreviation: string): States {
+    if (!stateOrAbbreviation) {
+        return null;
+    }
 
     if (stateOrAbbreviation.toLocaleLowerCase() === 'arizona' || stateOrAbbreviation.toLocaleLowerCase() === 'az') {
         return States.AZ;
