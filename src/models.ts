@@ -39,6 +39,23 @@ export interface IBusiness {
     documents?: IDocument[];
 };
 
+export enum Status {
+	'Incomplete' = 'Incomplete',
+	'Complete' = 'Complete',
+	'Failed' = 'Failed',
+	'Retry Id invalid' = 'Retry Id invalid',
+	'Bad request' = 'Bad request'
+}
+
+export interface IResponseBody {
+	status: Status;
+	retryId?: string;
+	statusCode?: number;
+	message?: string;
+	results?: IBusiness[];
+	alternativeResults?: any[];
+}
+
 export interface IOfficer {
     name: string;
     title?: string;
