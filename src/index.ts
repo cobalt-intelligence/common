@@ -1,6 +1,6 @@
 import { States } from './models';
 
-export { IBusiness, IParcel, States, IAddress, PropertyUses, IOfficer, IDocument } from './models';
+export { IBusiness, IParcel, States, IAddress, PropertyUses, IOfficer, IDocument, IResponseBody, Status } from './models';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
 // I know you're looking at that empty replace thinking, what the heck? Why is that there? Do NOT remove it.
 // It's removing invisible delimiters. You can't see them. Invisible.
