@@ -109,22 +109,22 @@ export function abbreviateState(stateOrAbbreviation: string): States {
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'nevada' || stateOrAbbreviation.toLocaleLowerCase() === 'nv') {
         return States.NV;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'new hampshire' || stateOrAbbreviation.toLocaleLowerCase() === 'nh') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newhampshire' || stateOrAbbreviation.toLocaleLowerCase() === 'new hampshire' || stateOrAbbreviation.toLocaleLowerCase() === 'nh') {
         return States.NH;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'new jersey' || stateOrAbbreviation.toLocaleLowerCase() === 'nj') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newjersey' || stateOrAbbreviation.toLocaleLowerCase() === 'new jersey' || stateOrAbbreviation.toLocaleLowerCase() === 'nj') {
         return States.NJ;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'new mexico' || stateOrAbbreviation.toLocaleLowerCase() === 'nm') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newmexico' || stateOrAbbreviation.toLocaleLowerCase() === 'new mexico' || stateOrAbbreviation.toLocaleLowerCase() === 'nm') {
         return States.NM;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'new york' || stateOrAbbreviation.toLocaleLowerCase() === 'ny') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newyork' || stateOrAbbreviation.toLocaleLowerCase() === 'new york' || stateOrAbbreviation.toLocaleLowerCase() === 'ny') {
         return States.NY;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'north carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'nc') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northcarolina' || stateOrAbbreviation.toLocaleLowerCase() === 'north carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'nc') {
         return States.NC;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'north dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'nd') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northDakota' || stateOrAbbreviation.toLocaleLowerCase() === 'north dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'nd') {
         return States.ND;
     }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'ohio' || stateOrAbbreviation.toLocaleLowerCase() === 'oh') {
@@ -139,16 +139,16 @@ export function abbreviateState(stateOrAbbreviation: string): States {
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'pennsylvania' || stateOrAbbreviation.toLocaleLowerCase() === 'pa') {
         return States.PA;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'rhode island' || stateOrAbbreviation.toLocaleLowerCase() === 'ri') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'rhodeisland' || stateOrAbbreviation.toLocaleLowerCase() === 'rhode island' || stateOrAbbreviation.toLocaleLowerCase() === 'ri') {
         return States.RI;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'south carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'sc') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'southcarolina' || stateOrAbbreviation.toLocaleLowerCase() === 'south carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'sc') {
         return States.SC;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'south dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'sd') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'southdakota' || stateOrAbbreviation.toLocaleLowerCase() === 'south dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'sd') {
         return States.SD;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'Tennessee' || stateOrAbbreviation.toLocaleLowerCase() === 'tn') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'tennessee' || stateOrAbbreviation.toLocaleLowerCase() === 'tn') {
         return States.TN;
     }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'texas' || stateOrAbbreviation.toLocaleLowerCase() === 'tx') {
@@ -166,7 +166,7 @@ export function abbreviateState(stateOrAbbreviation: string): States {
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'washington' || stateOrAbbreviation.toLocaleLowerCase() === 'wa') {
         return States.WA;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'west virginia' || stateOrAbbreviation.toLocaleLowerCase() === 'wv') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'westvirginia' || stateOrAbbreviation.toLocaleLowerCase() === 'west virginia' || stateOrAbbreviation.toLocaleLowerCase() === 'wv') {
         return States.WV;
     }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'wisconsin' || stateOrAbbreviation.toLocaleLowerCase() === 'wi') {
