@@ -37,6 +37,7 @@ export interface IBusiness {
     taxPayerNumber?: string;
     officers?: IOfficer[];
     documents?: IDocument[];
+    uccData?: IUCCData[];
 };
 
 export enum Status {
@@ -72,6 +73,41 @@ export interface IDocument {
     name: string;
     url: string;
     date?: string;
+}
+
+export interface IUCCData {
+    fileNumber: string;
+    debtorName: IDebtor[];
+    securedParty: ISecuredParty[];
+    type: string;
+    filingDate: string;
+    status?: string;
+    lapseDate?: string;
+    imageUrl?: string;
+}
+
+export interface IDebtor {
+    name: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+}
+
+export interface ISecuredParty {
+    name: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+}
+
+export interface IDebtor {
+    name: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
 }
 
 /**
