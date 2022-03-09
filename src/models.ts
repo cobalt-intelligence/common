@@ -38,6 +38,7 @@ export interface IBusiness {
     officers?: IOfficer[];
     documents?: IDocument[];
     uccData?: IUCCData[];
+    screenshotUrl?: string;
 };
 
 export enum Status {
