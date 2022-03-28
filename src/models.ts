@@ -78,8 +78,8 @@ export interface IDocument {
 
 export interface IUCCData {
     fileNumber: string;
-    debtorName: IDebtor[];
-    securedParty: ISecuredParty[];
+    debtors: IDebtor[];
+    securedParties: ISecuredParty[];
     type: string;
     filingDate: string;
     status?: string;
