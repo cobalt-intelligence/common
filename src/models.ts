@@ -25,6 +25,7 @@ export interface IBusiness {
     stateAddressState?: string;
     stateAddressZip?: string;
     entityType?: string;
+    entitySubType?: string;
     phoneNumber?: string;
     email?: string;
     agentIsCommercial?: boolean;
