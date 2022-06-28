@@ -40,7 +40,8 @@ export interface IBusiness {
     documents?: IDocument[];
     uccData?: IUCCData[];
     screenshotUrl?: string;
-};
+    alternativeResults?: any[];
+}
 
 export enum Status {
 	'Incomplete' = 'Incomplete',
