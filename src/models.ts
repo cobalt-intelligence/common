@@ -32,6 +32,7 @@ export interface IBusiness {
     url?: string;
     industry?: string;
     sosId?: string;
+    confidenceLevel?: number;
     /**
      * Used by Texas
      */
