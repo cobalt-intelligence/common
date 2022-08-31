@@ -34,6 +34,14 @@ export interface IBusiness {
     sosId?: string;
     confidenceLevel?: number;
     /**
+     * Will be ISO string format. IE: '2022-08-31T22:46:14.359Z'
+     */
+    normalizedFilingDate?: string;
+    /**
+     * Will be 'active' or 'inactive'.
+     */
+    normalizedStatus?: string;
+    /**
      * Used by Texas
      */
     taxPayerNumber?: string;
