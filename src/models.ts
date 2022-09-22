@@ -42,6 +42,10 @@ export interface IBusiness {
      */
     normalizedStatus?: string;
     /**
+     * Used to relay anything unexpected that may have occurred during the process.
+     */
+    messages: string[];
+    /**
      * Used by Texas
      */
     taxPayerNumber?: string;
