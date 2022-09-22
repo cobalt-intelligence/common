@@ -44,7 +44,7 @@ export interface IBusiness {
     /**
      * Used to relay anything unexpected that may have occurred during the process.
      */
-    messages: string[];
+    messages?: string[];
     /**
      * Used by Texas
      */
