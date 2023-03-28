@@ -49,6 +49,9 @@ export function abbreviateState(stateOrAbbreviation: string): States {
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'delaware' || stateOrAbbreviation.toLocaleLowerCase() === 'de') {
         return States.DE;
     }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'districtofcolumbia' || stateOrAbbreviation.toLocaleLowerCase() === 'district of columbia' || stateOrAbbreviation.toLocaleLowerCase() === 'dc') {
+        return States.DC;
+    }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'florida' || stateOrAbbreviation.toLocaleLowerCase() === 'fl') {
         return States.FL;
     }

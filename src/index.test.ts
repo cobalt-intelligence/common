@@ -21,6 +21,18 @@ describe('abbreviateState()', () => {
     it('should return undefined if it does not recognize the state', () => {
         expect(abbreviateState('North Carolinaz')).toBe(undefined);
     });
+
+    it('should handle the districtOfColumbia camelCased', () => {
+        expect(abbreviateState('districtOfColumbia')).toBe(States.DC);
+    });
+
+    it('should handle the "District of Columbia" with spaces', () => {
+        expect(abbreviateState('District of Columbia')).toBe(States.DC);
+    });
+
+    it('should handle the districtOfColumbia abbreviated', () => {
+        expect(abbreviateState('dc')).toBe(States.DC);
+    });
 });
 
 describe('formatBusinessName()', () => {
