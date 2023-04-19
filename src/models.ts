@@ -54,6 +54,7 @@ export interface IBusiness {
     uccData?: IUCCData[];
     screenshotUrl?: string;
     alternativeResults?: any[];
+    EIN?: string;
 }
 
 export enum Status {
