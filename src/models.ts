@@ -55,6 +55,7 @@ export interface IBusiness {
     screenshotUrl?: string;
     alternativeResults?: any[];
     EIN?: string;
+    personNameMatch?: string;
 }
 
 export enum Status {
