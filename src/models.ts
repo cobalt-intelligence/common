@@ -56,6 +56,7 @@ export interface IBusiness {
     alternativeResults?: any[];
     EIN?: string;
     personNameMatch?: string;
+    inactiveDate?: string;
 }
 
 export enum Status {
