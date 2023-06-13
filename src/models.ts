@@ -57,6 +57,7 @@ export interface IBusiness {
     EIN?: string;
     personNameMatch?: string;
     inactiveDate?: string;
+    aiConfidenceLevel?: number;
 }
 
 export enum Status {
