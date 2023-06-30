@@ -179,13 +179,13 @@ export interface IChange {
     changedTo: string;
 }
     
-export declare enum PropertyUses {
+export enum PropertyUses {
     'SFR' = "SFR",
     'MFR' = "MFR",
     'Vacant' = "Vacant",
     'Commercial' = "Commercial"
 }
-export declare enum States {
+export enum States {
     'AL' = "AL",
     'AK' = "AK",
     'AZ' = "AZ",
