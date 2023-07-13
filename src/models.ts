@@ -53,14 +53,16 @@ export interface IBusiness {
     documents?: IDocument[];
     uccData?: IUCCData[];
     screenshotUrl?: string;
-    alternativeResults?: any[];
+	alternativeResults?: IBusinessMeta[];
+	possibleAlternatives?: IBusinessMeta[];
     history?: IHistory[];
     EIN?: string;
     personNameMatch?: string;
     inactiveDate?: string;
     aiConfidenceLevel?: number;
+    ubiNumber?: string;
 }
-export declare enum Status {
+export enum Status {
     'Incomplete' = "Incomplete",
     'Complete' = "Complete",
     'Failed' = "Failed",
@@ -68,12 +70,23 @@ export declare enum Status {
     'Bad request' = "Bad request"
 }
 export interface IResponseBody {
-    status: Status;
-    retryId?: string;
-    statusCode?: number;
-    message?: string;
-    results?: IBusiness[];
-    alternativeResults?: any[];
+	status: Status;
+	retryId?: string;
+	statusCode?: number;
+	message?: string;
+	results?: IBusiness[];
+	alternativeResults?: IBusinessMeta[];
+	possibleAlternatives?: IBusinessMeta[];
+	nameAvailable?: boolean;
+	requestId?: string;
+	callbackData?: {
+		requestId: string; 
+		callbackUrl: string;
+	};
+	/**
+	 * For weird backwards compatibility of callbackUrl
+	 */
+	business?: IBusiness;
 }
 export interface IOfficer {
     name: string;
@@ -178,6 +191,26 @@ export interface IChange {
     changedFrom: string;
     changedTo: string;
 }
+
+export interface IBusinessMeta {
+	businessName: string;
+	status?: string;
+	sosId?: string;
+	url?: string;
+	agentName?: string;
+	agentTitle?: string;
+	street?: string;
+	city?: string;
+	zip?: string;
+	state?: string;
+	confidenceLevel?: number;
+	personName?: string;
+	personTitle?: string;
+	entityType?: string;
+	filingDate?: string;
+	aiConfidenceLevel?: number;
+}
+
     
 export enum PropertyUses {
     'SFR' = "SFR",
