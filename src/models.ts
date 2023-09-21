@@ -61,6 +61,14 @@ export interface IBusiness {
     aiConfidenceLevel?: number;
     agentResigned?: boolean;
     agentResignedDate?: string;
+    /**
+     * New York also uses a service of process agent
+     */    
+    sopName?: string;
+    sopCity?: string;
+    sopState?: States;
+    sopZip?: string;
+    sopStreetAddress?: string;
 }
 export declare enum Status {
     'Incomplete' = "Incomplete",
