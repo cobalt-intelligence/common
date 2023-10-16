@@ -77,6 +77,7 @@ export interface IAssumedBusinessName {
     effectiveDate?: string;
     status?: string;
     type?: string;
+    expirationDate?: string;
 }
 
 export declare enum Status {
