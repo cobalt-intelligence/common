@@ -76,6 +76,7 @@ export interface IAssumedBusinessName {
     title: string;
     effectiveDate?: string;
     status?: string;
+    type?: string;
 }
 
 export declare enum Status {
