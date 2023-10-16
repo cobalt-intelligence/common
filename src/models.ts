@@ -69,7 +69,15 @@ export interface IBusiness {
     sopState?: States;
     sopZip?: string;
     sopStreetAddress?: string;
+    assumedBusinessNames?: IAssumedBusinessName[];
 }
+
+export interface IAssumedBusinessName {
+    title: string;
+    effectiveDate?: string;
+    status?: string;
+}
+
 export declare enum Status {
     'Incomplete' = "Incomplete",
     'Complete' = "Complete",
