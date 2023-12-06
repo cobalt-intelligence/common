@@ -110,7 +110,9 @@ export interface IDocument {
     name: string;
     url: string;
     date?: string;
+    comment?: string;
 }
+
 export interface IUCCData {
     fileNumber: string;
     debtors: IDebtor[];
@@ -193,10 +195,13 @@ export interface IHistory {
     date: string;
     changes: IChange[];
 }
+
 export interface IChange {
     name: string;
-    changedFrom: string;
-    changedTo: string;
+    changedFrom?: string;
+    changedTo?: string;
+    action?: string;
+    title?: string;
 }
     
 export enum PropertyUses {
