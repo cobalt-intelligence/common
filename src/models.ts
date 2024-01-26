@@ -71,6 +71,11 @@ export interface IBusiness {
     sopStreetAddress?: string;
     assumedBusinessNames?: IAssumedBusinessName[];
     addressMatch?: boolean;
+    /**
+     * This will only show up when the name listed on the search results differs from the name within the details.
+     * This can happen when the name on the search results is a DBA the and details page lists the legal name.
+     */
+    searchResultTitle?: string;
 }
 
 export interface IAssumedBusinessName {
