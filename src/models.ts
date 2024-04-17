@@ -100,6 +100,7 @@ export interface IResponseBody {
     message?: string;
     results?: IBusiness[];
     alternativeResults?: any[];
+    callbackData?: ICallbackData;
 }
 export interface IOfficer {
     name: string;
@@ -169,6 +170,11 @@ export interface IChange {
     changedTo?: string;
     action?: string;
     title?: string;
+}
+
+export interface ICallbackData {
+    requestId: string;
+    callbackUrl: string;
 }
     
 export enum States {
