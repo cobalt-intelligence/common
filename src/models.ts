@@ -57,6 +57,7 @@ export interface IBusiness {
     history?: IHistory[];
     EIN?: string;
     personNameMatch?: string;
+    /**May be date or something like 'Perpetual' */
     inactiveDate?: string;
     aiConfidenceLevel?: number;
     agentResigned?: boolean;
@@ -76,6 +77,7 @@ export interface IBusiness {
      * This can happen when the name on the search results is a DBA the and details page lists the legal name.
      */
     searchResultTitle?: string;
+    nextReportDueDate?: string;
 }
 
 export interface IAssumedBusinessName {
