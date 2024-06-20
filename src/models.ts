@@ -78,6 +78,7 @@ export interface IBusiness {
      */
     searchResultTitle?: string;
     nextReportDueDate?: string;
+    ubiNumber?: string;
 }
 
 export interface IAssumedBusinessName {
