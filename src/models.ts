@@ -78,6 +78,10 @@ export interface IBusiness {
      */
     searchResultTitle?: string;
     nextReportDueDate?: string;
+    /**
+     * This is WA specific
+     */
+    ubiNumber?: string;
 }
 
 export interface IAssumedBusinessName {
