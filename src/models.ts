@@ -64,7 +64,7 @@ export interface IBusiness {
     agentResignedDate?: string;
     /**
      * New York also uses a service of process agent
-     */    
+     */
     sopName?: string;
     sopCity?: string;
     sopState?: States;
@@ -83,15 +83,14 @@ export interface IBusiness {
      */
     ubiNumber?: string;
 }
-
 export interface IAssumedBusinessName {
     title: string;
     effectiveDate?: string;
     status?: string;
     type?: string;
     expirationDate?: string;
+    sosId?: string;
 }
-
 export declare enum Status {
     'Incomplete' = "Incomplete",
     'Complete' = "Complete",
@@ -182,8 +181,8 @@ export interface ICallbackData {
     requestId: string;
     callbackUrl: string;
 }
-    
-export enum States {
+
+export declare enum States {
     'AL' = "AL",
     'AK' = "AK",
     'AZ' = "AZ",
