@@ -182,7 +182,7 @@ export interface ICallbackData {
     callbackUrl: string;
 }
 
-export declare enum States {
+export enum States {
     'AL' = "AL",
     'AK' = "AK",
     'AZ' = "AZ",
