@@ -82,6 +82,7 @@ export interface IBusiness {
      * This is WA specific
      */
     ubiNumber?: string;
+    arStanding?: string;
 }
 export interface IAssumedBusinessName {
     title: string;
@@ -90,6 +91,7 @@ export interface IAssumedBusinessName {
     type?: string;
     expirationDate?: string;
     sosId?: string;
+    jointVenture?: boolean;
 }
 export declare enum Status {
     'Incomplete' = "Incomplete",
