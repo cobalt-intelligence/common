@@ -1,13 +1,22 @@
 import { States } from './models';
 
-export { IBusiness, States, IAddress, IOfficer, IDocument, IUCCData, IDebtor, ISecuredParty, IResponseBody, Status, IAssumedBusinessName } from './models';
+export { States, Status } from './models';
+export type { IBusiness, IAddress, IOfficer, IDocument, IUCCData, IDebtor, ISecuredParty, IResponseBody, IAssumedBusinessName } from './models';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
 // I know you're looking at that empty replace thinking, what the heck? Why is that there? Do NOT remove it.
 // It's removing invisible delimiters. You can't see them. Invisible.
 // Or do remove it and see the tests fail. I dare you.
 export function formatBusinessName(businessName: string) {
     if (businessName) {
-        return businessName.replace(/,/g, '').replace(/\./g, '').replace(/‎/g, '').toLocaleLowerCase().trim();
+        return businessName
+        // Remove characters entirely
+        .replace(/[,.’'".‎\u200E\u200F\u00A0]/g, '')
+        // Replace & with "and"
+        .replace(/&/g, 'and')
+        // Collapse any whitespace runs to a single space
+        .replace(/\s+/g, ' ')
+        .toLocaleLowerCase()
+        .trim();
     }
     else {
         return null;
