@@ -7,9 +7,13 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "skipLibCheck": true,
-	"allowSyntheticDefaultImports": true,
-	"isolatedModules": true,
-	"types": ["jest", "node", "@types/jest", "@types/node"]
+	  "allowSyntheticDefaultImports": true,
+	  "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+	  "types": ["jest", "node", "@types/jest", "@types/node"]
   },
   "exclude": ["src/**/*.spec.ts"]
 }
