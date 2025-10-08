@@ -125,6 +125,7 @@ export interface IDocument {
     url: string;
     date?: string;
     comment?: string;
+    cobaltUrl?: string;
 }
 
 export interface IUCCData {
