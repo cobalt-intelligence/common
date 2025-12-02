@@ -83,6 +83,10 @@ export interface IBusiness {
      */
     ubiNumber?: string;
     arStanding?: string;
+    /**
+     * Currently only MD
+     */
+    goodStanding?: string;
 }
 export interface IAssumedBusinessName {
     title: string;
