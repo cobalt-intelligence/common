@@ -87,6 +87,7 @@ export interface IBusiness {
      * Currently only MD
      */
     goodStanding?: string;
+    fullDataCount?: IFullDataCount;
 }
 export interface IAssumedBusinessName {
     title: string;
@@ -187,6 +188,14 @@ export interface IChange {
 export interface ICallbackData {
     requestId: string;
     callbackUrl: string;
+}
+
+export interface IFullDataCount {
+    officersCount: number;
+    documentsCount: number;
+    uccDataCount: number;
+    assumedBusinessNamesCount: number;
+    historyCount: number;
 }
 
 export enum States {
