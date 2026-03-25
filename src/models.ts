@@ -139,6 +139,14 @@ export interface IBusiness {
     goodStanding?: string;
     /** Counts of officers, documents, UCC data, assumed names, and history entries */
     fullDataCount?: IFullDataCount;
+    /** Colorado-specific registrant name */
+    registrantName?: string;
+    /** Colorado-specific registrant URL */
+    registrantUrl?: string;
+    /** Whether the screenshot was successfully captured (returned when screenshot=true is requested) */
+    screenshotSucceeded?: boolean;
+    /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
+    uccSucceeded?: boolean;
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */
