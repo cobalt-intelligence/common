@@ -147,6 +147,8 @@ export interface IBusiness {
     screenshotSucceeded?: boolean;
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
+    /** If the state provides a reason for the status, we provide that reason here */
+    statusReason?: string;
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */
