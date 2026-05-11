@@ -12,6 +12,8 @@ export interface IBusiness {
     stateOfSosRegistration?: States;
     /** The business's status as reported by the SOS (e.g., "Active", "Inactive", "Dissolved") */
     status?: string;
+    /** If the state provides a reason for the status, we provide that reason here */
+    statusReason?: string;
     /** The registered agent's name */
     agentName?: string;
     /** The registered agent's city */
