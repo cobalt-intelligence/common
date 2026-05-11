@@ -12,6 +12,8 @@ export interface IBusiness {
     stateOfSosRegistration?: States;
     /** The business's status as reported by the SOS (e.g., "Active", "Inactive", "Dissolved") */
     status?: string;
+    /** If the state provides a reason for the status, we provide that reason here */
+    statusReason?: string;
     /** The registered agent's name */
     agentName?: string;
     /** The registered agent's city */
@@ -147,8 +149,6 @@ export interface IBusiness {
     screenshotSucceeded?: boolean;
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
-    /** If the state provides a reason for the status, we provide that reason here */
-    statusReason?: string;
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */
