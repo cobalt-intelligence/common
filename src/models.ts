@@ -149,6 +149,10 @@ export interface IBusiness {
     screenshotSucceeded?: boolean;
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
+    /**
+     * Currently only DE (Delaware)
+     */
+    taxAmountDue?: string;
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */

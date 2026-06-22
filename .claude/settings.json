@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm whoami *)",
+      "Bash(mkdir -p .github/workflows)",
+      "Bash(git mv *)",
+      "Bash(mv .github/ci.yml .github/workflows/ci.yml)"
+    ]
+  }
+}
