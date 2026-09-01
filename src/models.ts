@@ -170,7 +170,9 @@ export interface IAssumedBusinessName {
     /** Whether this is a joint venture */
     jointVenture?: boolean;
 }
-export declare enum Status {
+// A real enum, not `declare`: `declare enum` emits no JavaScript, so `Status` was undefined at runtime
+// for every consumer even though index.ts re-exported it.
+export enum Status {
     'Incomplete' = "Incomplete",
     'Complete' = "Complete",
     'Failed' = "Failed",
@@ -318,6 +320,37 @@ export interface ICallbackData {
     requestId: string;
     /** URL to receive the webhook callback */
     callbackUrl: string;
+}
+
+/** Outcome of a UCC search, as handed to createUccResponseBody */
+export interface IUccResult {
+    /** The debtor name that was searched */
+    searchQuery?: string;
+    /** State name or abbreviation in any casing */
+    state?: string;
+    /** false when the search could not be completed */
+    succeeded: boolean;
+    /** Optional message; used as the failure message when succeeded is false */
+    message?: string;
+    uccData?: IUCCData[];
+    /** Total filings found, when more were found than are included in uccData */
+    uccDataCount?: number;
+}
+
+/** Customer-facing body of a UCC-only (GET /ucc) request */
+export interface IUccResponseBody {
+    status: Status;
+    statusCode: number;
+    message?: string;
+    /** The debtor name that was searched */
+    searchQuery?: string;
+    /** Two letter state */
+    state?: string;
+    uccData?: IUCCData[];
+    /** Total filings found, including any beyond the stored cap */
+    uccDataCount?: number;
+    requestId?: string;
+    callbackUrl?: string;
 }
 
 export interface IFullDataCount {
