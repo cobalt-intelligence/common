@@ -37,6 +37,18 @@ describe('abbreviateState()', () => {
     it('should handle the districtOfColumbia abbreviated', () => {
         expect(abbreviateState('dc')).toBe(States.DC);
     });
+
+    it('should handle puertoRico camelCased', () => {
+        expect(abbreviateState('puertoRico')).toBe(States.PR);
+    });
+
+    it('should handle "Puerto Rico" with a space', () => {
+        expect(abbreviateState('Puerto Rico')).toBe(States.PR);
+    });
+
+    it('should handle Puerto Rico abbreviated', () => {
+        expect(abbreviateState('pr')).toBe(States.PR);
+    });
 });
 
 describe('formatBusinessName()', () => {
