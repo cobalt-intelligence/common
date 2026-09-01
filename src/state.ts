@@ -128,6 +128,9 @@ export function abbreviateState(stateOrAbbreviation: string): States | undefined
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'pennsylvania' || stateOrAbbreviation.toLocaleLowerCase() === 'pa') {
         return States.PA;
     }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'puertorico' || stateOrAbbreviation.toLocaleLowerCase() === 'puerto rico' || stateOrAbbreviation.toLocaleLowerCase() === 'pr') {
+        return States.PR;
+    }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'rhodeisland' || stateOrAbbreviation.toLocaleLowerCase() === 'rhode island' || stateOrAbbreviation.toLocaleLowerCase() === 'ri') {
         return States.RI;
     }
