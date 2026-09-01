@@ -113,7 +113,7 @@ export function abbreviateState(stateOrAbbreviation: string): States | undefined
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'northcarolina' || stateOrAbbreviation.toLocaleLowerCase() === 'north carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'nc') {
         return States.NC;
     }
-    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northDakota' || stateOrAbbreviation.toLocaleLowerCase() === 'north dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'nd') {
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northdakota' || stateOrAbbreviation.toLocaleLowerCase() === 'north dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'nd') {
         return States.ND;
     }
     else if (stateOrAbbreviation.toLocaleLowerCase() === 'ohio' || stateOrAbbreviation.toLocaleLowerCase() === 'oh') {

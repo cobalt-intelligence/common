@@ -18,6 +18,10 @@ describe('abbreviateState()', () => {
         expect(abbreviateState('northCarolina')).toBe(States.NC);
     });
 
+    it('should return a state from the enum even if the state is camelCased', () => {
+        expect(abbreviateState('northDakota')).toBe(States.ND);
+    });
+
     it('should return undefined if it does not recognize the state', () => {
         expect(abbreviateState('North Carolinaz')).toBe(undefined);
     });
