@@ -1,5 +1,5 @@
-import { abbreviateState } from '.';
 import { IUccResponseBody, IUccResult, Status } from './models';
+import { abbreviateState } from './state';
 
 /** Messages a UCC search can carry back to the caller */
 export const UCC_RESULT_FOUND = 'UCC data found.';

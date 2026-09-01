@@ -1,0 +1,167 @@
+import { States } from './models';
+
+/**
+ * This function accepts either a full state name in any case or a state abbreviation in any case and will return
+ * the correct states enum.
+ *
+ * @param stateOrAbbreviation Can be a state, such as "Idaho" or abbreviation, such as "ID"
+ */
+export function abbreviateState(stateOrAbbreviation: string): States | undefined {
+    if (!stateOrAbbreviation) {
+        return undefined;
+    }
+
+    if (stateOrAbbreviation.toLocaleLowerCase() === 'arizona' || stateOrAbbreviation.toLocaleLowerCase() === 'az') {
+        return States.AZ;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'alabama' || stateOrAbbreviation.toLocaleLowerCase() === 'al') {
+        return States.AL;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'alaska' || stateOrAbbreviation.toLocaleLowerCase() === 'ak') {
+        return States.AK;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'arkansas' || stateOrAbbreviation.toLocaleLowerCase() === 'ar') {
+        return States.AR;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'california' || stateOrAbbreviation.toLocaleLowerCase() === 'ca') {
+        return States.CA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'colorado' || stateOrAbbreviation.toLocaleLowerCase() === 'co') {
+        return States.CO;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'connecticut' || stateOrAbbreviation.toLocaleLowerCase() === 'ct') {
+        return States.CT;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'delaware' || stateOrAbbreviation.toLocaleLowerCase() === 'de') {
+        return States.DE;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'districtofcolumbia' || stateOrAbbreviation.toLocaleLowerCase() === 'district of columbia' || stateOrAbbreviation.toLocaleLowerCase() === 'dc') {
+        return States.DC;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'florida' || stateOrAbbreviation.toLocaleLowerCase() === 'fl') {
+        return States.FL;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'georgia' || stateOrAbbreviation.toLocaleLowerCase() === 'ga') {
+        return States.GA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'hawaii' || stateOrAbbreviation.toLocaleLowerCase() === 'hi') {
+        return States.HI;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'idaho' || stateOrAbbreviation.toLocaleLowerCase() === 'id') {
+        return States.ID;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'illinois' || stateOrAbbreviation.toLocaleLowerCase() === 'il') {
+        return States.IL;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'indiana' || stateOrAbbreviation.toLocaleLowerCase() === 'in') {
+        return States.IN;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'iowa' || stateOrAbbreviation.toLocaleLowerCase() === 'ia') {
+        return States.IA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'kansas' || stateOrAbbreviation.toLocaleLowerCase() === 'ks') {
+        return States.KS;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'kentucky' || stateOrAbbreviation.toLocaleLowerCase() === 'ky') {
+        return States.KY;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'louisiana' || stateOrAbbreviation.toLocaleLowerCase() === 'la') {
+        return States.LA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'maine' || stateOrAbbreviation.toLocaleLowerCase() === 'me') {
+        return States.ME;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'maryland' || stateOrAbbreviation.toLocaleLowerCase() === 'md') {
+        return States.MD;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'massachusetts' || stateOrAbbreviation.toLocaleLowerCase() === 'ma') {
+        return States.MA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'michigan' || stateOrAbbreviation.toLocaleLowerCase() === 'mi') {
+        return States.MI;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'minnesota' || stateOrAbbreviation.toLocaleLowerCase() === 'mn') {
+        return States.MN;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'mississippi' || stateOrAbbreviation.toLocaleLowerCase() === 'ms') {
+        return States.MS;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'missouri' || stateOrAbbreviation.toLocaleLowerCase() === 'mo') {
+        return States.MO;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'montana' || stateOrAbbreviation.toLocaleLowerCase() === 'mt') {
+        return States.MT;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'nebraska' || stateOrAbbreviation.toLocaleLowerCase() === 'ne') {
+        return States.NE;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'nevada' || stateOrAbbreviation.toLocaleLowerCase() === 'nv') {
+        return States.NV;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newhampshire' || stateOrAbbreviation.toLocaleLowerCase() === 'new hampshire' || stateOrAbbreviation.toLocaleLowerCase() === 'nh') {
+        return States.NH;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newjersey' || stateOrAbbreviation.toLocaleLowerCase() === 'new jersey' || stateOrAbbreviation.toLocaleLowerCase() === 'nj') {
+        return States.NJ;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newmexico' || stateOrAbbreviation.toLocaleLowerCase() === 'new mexico' || stateOrAbbreviation.toLocaleLowerCase() === 'nm') {
+        return States.NM;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'newyork' || stateOrAbbreviation.toLocaleLowerCase() === 'new york' || stateOrAbbreviation.toLocaleLowerCase() === 'ny') {
+        return States.NY;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northcarolina' || stateOrAbbreviation.toLocaleLowerCase() === 'north carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'nc') {
+        return States.NC;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'northDakota' || stateOrAbbreviation.toLocaleLowerCase() === 'north dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'nd') {
+        return States.ND;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'ohio' || stateOrAbbreviation.toLocaleLowerCase() === 'oh') {
+        return States.OH;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'oklahoma' || stateOrAbbreviation.toLocaleLowerCase() === 'ok') {
+        return States.OK;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'oregon' || stateOrAbbreviation.toLocaleLowerCase() === 'or') {
+        return States.OR;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'pennsylvania' || stateOrAbbreviation.toLocaleLowerCase() === 'pa') {
+        return States.PA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'rhodeisland' || stateOrAbbreviation.toLocaleLowerCase() === 'rhode island' || stateOrAbbreviation.toLocaleLowerCase() === 'ri') {
+        return States.RI;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'southcarolina' || stateOrAbbreviation.toLocaleLowerCase() === 'south carolina' || stateOrAbbreviation.toLocaleLowerCase() === 'sc') {
+        return States.SC;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'southdakota' || stateOrAbbreviation.toLocaleLowerCase() === 'south dakota' || stateOrAbbreviation.toLocaleLowerCase() === 'sd') {
+        return States.SD;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'tennessee' || stateOrAbbreviation.toLocaleLowerCase() === 'tn') {
+        return States.TN;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'texas' || stateOrAbbreviation.toLocaleLowerCase() === 'tx') {
+        return States.TX;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'utah' || stateOrAbbreviation.toLocaleLowerCase() === 'ut') {
+        return States.UT;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'vermont' || stateOrAbbreviation.toLocaleLowerCase() === 'vt') {
+        return States.VT;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'virginia' || stateOrAbbreviation.toLocaleLowerCase() === 'va') {
+        return States.VA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'washington' || stateOrAbbreviation.toLocaleLowerCase() === 'wa') {
+        return States.WA;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'westvirginia' || stateOrAbbreviation.toLocaleLowerCase() === 'west virginia' || stateOrAbbreviation.toLocaleLowerCase() === 'wv') {
+        return States.WV;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'wisconsin' || stateOrAbbreviation.toLocaleLowerCase() === 'wi') {
+        return States.WI;
+    }
+    else if (stateOrAbbreviation.toLocaleLowerCase() === 'wyoming' || stateOrAbbreviation.toLocaleLowerCase() === 'wy') {
+        return States.WY;
+    }
+}
