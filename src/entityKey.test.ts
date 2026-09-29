@@ -2,14 +2,11 @@ import { entityKey, parseEntityKey, type EntityKeyInput } from './entityKey';
 import { entityKey as exportedEntityKey, parseEntityKey as exportedParseEntityKey } from './index';
 import { States } from './models';
 
-// Builds an input with a plain string state, since test partitions such as
-// WA_TEST are not in the States enum but do exist in the table.
+// Takes a plain string state, since partitions such as WA_TEST are not in the States enum.
 function biz(state: string | undefined, fields: Omit<EntityKeyInput, 'stateOfSosRegistration'> = {}): EntityKeyInput {
     return { stateOfSosRegistration: state as States | undefined, ...fields };
 }
 
-// One fixture per key shape in lambda-sos-search docs/plans/business-identity/DISCOVERY.md
-// section 7, most taken from the sampled rows in 7.4.
 const fixtures: Array<{ name: string; input: EntityKeyInput; key: string }> = [
     {
         name: 'IL entity type after a space',
@@ -115,9 +112,6 @@ describe('entityKey()', () => {
         expect(entityKey(biz('il', { sosId: 'x1' }))).toBe('il:sosId#X1');
     });
 
-    // The insert Lambda handler drops a titleless business before writing
-    // anything; entityKey deliberately does not, because it mirrors the
-    // primary-row key, which does not contain the title.
     it('returns a sosId key for a business with an empty or missing title, mirroring the primary-row key rather than the handler title filter', () => {
         expect(entityKey(biz('MN', { sosId: '42914-LLC 44' }))).toBe('MN:sosId#42914-LLC 44');
         expect(entityKey(biz('MN', { sosId: '42914-LLC 44', title: '' }))).toBe('MN:sosId#42914-LLC 44');
@@ -196,7 +190,6 @@ describe('parseEntityKey()', () => {
         expect(parseEntityKey('IL:sosId#')).toBeNull();
         expect(parseEntityKey('IL:agentOrOfficer#JOHN SMITH#sosId#1')).toBeNull();
         expect(parseEntityKey('IL:updatedAt#1727000000000#sosId#1')).toBeNull();
-        // The unsuffixed CA title# duplicates from DISCOVERY 7.4.
         expect(parseEntityKey('CA:title#SUNSHINE CLEANERS LLC')).toBeNull();
         expect(parseEntityKey('PA:title##filingDate#2004-06-15')).toBeNull();
         expect(parseEntityKey('PA:title#KEYSTONE DINER INC#filingDate#')).toBeNull();
@@ -228,44 +221,17 @@ describe('entityKey round trip', () => {
     });
 });
 
-// Pinned against the insert Lambda. Every expected value below was worked out
-// by hand from insert-to-sos-businesses-vXXX src/index.ts at origin/master
-// dd78618, not by running entityKey:
-//   lines 105-115  a business with a falsy title or stateOfSosRegistration is dropped
-//   lines 122-128  stringFields (454-499): String(value) for title, state, sosId, normalizedFilingDate
-//   lines 149-152  title, and sosId when a string, get toLocaleUpperCase()
-//   lines 246-252  truthy sosId: uniqueSuffix #sosId#<SOSID>; else trimmed
-//                  normalizedFilingDate: #filingDate#<DATE>; else throw (no write)
-//   lines 258-260  probe (primary) row sk: sosId#<SOSID>, or title#<TITLE><uniqueSuffix>
-//   line 264, 441  pk is stateOfSosRegistration as sent, not uppercased
-//   line 329       the probe row is written last, as the commit record
-//   lines 357-358  contentRowSks writes the same unsuffixed sosId# key
-// entityKey mirrors the state drop at 110-113 but deliberately not the title
-// drop at 106-109 when a sosId is present, since the primary-row key does not
-// contain the title. That case is tested in the entityKey() block above, not
-// pinned here, because the Lambda itself writes nothing for it.
-// If the insert Lambda changes how it builds any of these, entityKey must
-// change with it and these pins must be re-derived. If entityKey drifts on its
-// own, these fail.
+// Expected values follow insert-to-sos-businesses-vXXX src/index.ts.
 describe('entityKey pinned to the insert Lambda key rules', () => {
     const pins: Array<[string, EntityKeyInput, string | null]> = [
-        // 122-128 String(23395892) = '23395892'; 150-152 no letters to uppercase; 259.
         ['numeric sosId', biz('AZ', { sosId: 23395892, title: 'x' }), 'AZ:sosId#23395892'],
-        // String(0) = '0' is truthy at 246, so the sosId form wins over the filing date.
         ['numeric zero sosId', biz('AZ', { sosId: 0, title: 'x', normalizedFilingDate: '2020-01-01' }), 'AZ:sosId#0'],
-        // 151 uppercases; 259 builds sosId#; spaces kept since nothing trims or splits.
         ['IL suffix, lowercase', biz('IL', { sosId: '01234567 llc', title: 'x' }), 'IL:sosId#01234567 LLC'],
-        // 246 takes any truthy string, whitespace included; nothing trims it.
         ['whitespace sosId', biz('WA', { sosId: '  ', title: 'x' }), 'WA:sosId#  '],
-        // 246 falsy '' -> 248 trims ' 2004-06-15 '; 149 and 260 uppercase the untrimmed title.
         ['empty sosId, padded date', biz('PA', { sosId: '', title: ' Keystone ', normalizedFilingDate: ' 2004-06-15 ' }), 'PA:title# KEYSTONE #filingDate#2004-06-15'],
-        // 122-128 String(20040615) then 249 trim.
         ['numeric filing date', biz('PA', { title: 'Keystone', normalizedFilingDate: 20040615 as unknown as string }), 'PA:title#KEYSTONE#filingDate#20040615'],
-        // 248 '   '.trim() is falsy -> 251 throws, nothing written.
         ['blank filing date', biz('PA', { title: 'Keystone', normalizedFilingDate: '   ' }), null],
-        // 110-113 falsy state is dropped.
         ['no state', biz(undefined, { sosId: '1', title: 'x' }), null],
-        // 264 and 441 use the state as sent.
         ['lowercase state', biz('ga', { sosId: 'pending-1', title: 'x' }), 'ga:sosId#PENDING-1']
     ];
 
