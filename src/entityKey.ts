@@ -1,7 +1,9 @@
 import type { IBusiness } from './models';
 
 /** The fields entityKey reads. sosId also takes a number because some AZ rows store it as one. */
-export type EntityKeyInput = Pick<IBusiness, 'stateOfSosRegistration' | 'title' | 'normalizedFilingDate'> & {
+export type EntityKeyInput = Pick<IBusiness, 'title' | 'normalizedFilingDate'> & {
+    // Widened to string: this helper preserves arbitrary partitions (e.g. WA_TEST) not in the States enum.
+    stateOfSosRegistration?: IBusiness['stateOfSosRegistration'] | string | null;
     sosId?: IBusiness['sosId'] | number | null;
 };
 

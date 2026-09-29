@@ -1,10 +1,9 @@
 import { entityKey, parseEntityKey, type EntityKeyInput } from './entityKey';
 import { entityKey as exportedEntityKey, parseEntityKey as exportedParseEntityKey } from './index';
-import { States } from './models';
 
 // Takes a plain string state, since partitions such as WA_TEST are not in the States enum.
 function biz(state: string | undefined, fields: Omit<EntityKeyInput, 'stateOfSosRegistration'> = {}): EntityKeyInput {
-    return { stateOfSosRegistration: state as States | undefined, ...fields };
+    return { stateOfSosRegistration: state, ...fields };
 }
 
 const fixtures: Array<{ name: string; input: EntityKeyInput; key: string }> = [
