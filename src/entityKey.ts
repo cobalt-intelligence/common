@@ -45,11 +45,21 @@ function stringField(value: unknown): string | undefined {
  *   uppercased (not trimmed) and normalizedFilingDate trimmed, exactly as the
  *   insert Lambda builds it.
  *
- * Returns null when the insert Lambda would refuse the business (a falsy
- * state, or neither a sosId nor a non-blank normalizedFilingDate, which is
- * the throw at line 251), or when the title form is needed and there is no
- * title. A missing title does not block the sosId form: that key does not
- * contain the title, and sosId# rows with an empty title exist (MN GUID rows).
+ * entityKey mirrors how the primary-row key is built, not which businesses
+ * the insert Lambda handler accepts. In particular it deliberately returns a
+ * key for a business that has a sosId but an empty or missing title, even
+ * though the handler's title filter (lines 106-109) drops a titleless
+ * business before anything is written. The sosId key does not contain the
+ * title, and sosId# rows with empty titles do exist in the table (Minnesota
+ * rows, for example). So a non-null key does not mean the insert Lambda would
+ * write the business.
+ *
+ * Returns null only in these cases:
+ * - no business at all;
+ * - a falsy state, which the handler also drops (lines 110-113);
+ * - a state containing ':', which could not be split back out of the key;
+ * - no sosId and no non-blank normalizedFilingDate (the Lambda throws at 251);
+ * - no sosId and no title, since the title form needs a title.
  */
 export function entityKey(business: EntityKeyInput | null | undefined): string | null {
     if (!business) return null;
@@ -68,6 +78,7 @@ export function entityKey(business: EntityKeyInput | null | undefined): string |
     // toLocaleUpperCase is idempotent, so once is the same as twice. String(0)
     // is "0", which is truthy, so a numeric 0 takes the sosId form as it does
     // in the Lambda.
+    // No title check on this path: see the docstring on titleless businesses.
     const sosId = stringField(business.sosId);
     if (sosId) {
         return `${state}:${SOS_ID_PREFIX}${sosId.toLocaleUpperCase()}`;
@@ -78,8 +89,11 @@ export function entityKey(business: EntityKeyInput | null | undefined): string |
     const filingDate = stringField(business.normalizedFilingDate)?.trim();
     if (!filingDate) return null;
 
-    // Lines 106-108 drop a business with a falsy title. The title form needs
-    // one; it is uppercased at 149 and 260 and never trimmed.
+    // The title form needs a title: without one the sk would be
+    // `title##filingDate#...`, which parseEntityKey rejects. (The handler's
+    // title filter at lines 106-109 drops every titleless business; entityKey
+    // applies it only here.) The title is uppercased at 149 and 260 and never
+    // trimmed.
     if (!business.title) return null;
     const title = String(business.title).toLocaleUpperCase();
 
@@ -93,9 +107,12 @@ export function entityKey(business: EntityKeyInput | null | undefined): string |
  * since a title may itself contain '#'. (An uppercased title can never contain
  * the lowercase separator, so for keys entityKey builds, first and last agree.)
  *
- * Returns null for anything entityKey cannot produce: no ':', an empty state,
- * an unknown prefix, an empty sosId, or a title key missing its title or
- * filing date (such as the unsuffixed CA `title#` duplicates).
+ * This is a structural parser. It returns null for a key with no ':', an
+ * empty state, an unknown prefix (neither `sosId#` nor `title#`), an empty
+ * sosId, or a title key missing its title or its filing-date part (such as the
+ * unsuffixed CA `title#` duplicates). It does not check case or whitespace,
+ * so a non-null result does not mean entityKey could have built the key: a
+ * lowercase sosId or title, for example, parses as it stands.
  */
 export function parseEntityKey(key: string | null | undefined): ParsedEntityKey | null {
     if (typeof key !== 'string') return null;

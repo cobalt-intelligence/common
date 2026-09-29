@@ -115,8 +115,13 @@ describe('entityKey()', () => {
         expect(entityKey(biz('il', { sosId: 'x1' }))).toBe('il:sosId#X1');
     });
 
-    it('returns the sosId form without a title, since the key does not contain it', () => {
+    // The insert Lambda handler drops a titleless business before writing
+    // anything; entityKey deliberately does not, because it mirrors the
+    // primary-row key, which does not contain the title.
+    it('returns a sosId key for a business with an empty or missing title, mirroring the primary-row key rather than the handler title filter', () => {
         expect(entityKey(biz('MN', { sosId: '42914-LLC 44' }))).toBe('MN:sosId#42914-LLC 44');
+        expect(entityKey(biz('MN', { sosId: '42914-LLC 44', title: '' }))).toBe('MN:sosId#42914-LLC 44');
+        expect(entityKey(biz('MN', { sosId: '42914-LLC 44', title: null as unknown as string }))).toBe('MN:sosId#42914-LLC 44');
     });
 
     it('returns null when there is neither a sosId nor a filing date', () => {
@@ -183,7 +188,7 @@ describe('parseEntityKey()', () => {
             .toEqual({ state: 'PA', kind: 'titleFilingDate', title: 'A#filingDate#B', filingDate: '2019-03-04' });
     });
 
-    it('returns null for keys entityKey cannot produce', () => {
+    it('returns null for structurally malformed keys', () => {
         expect(parseEntityKey('')).toBeNull();
         expect(parseEntityKey('sosId#123')).toBeNull();
         expect(parseEntityKey(':sosId#123')).toBeNull();
@@ -235,6 +240,10 @@ describe('entityKey round trip', () => {
 //   line 264, 441  pk is stateOfSosRegistration as sent, not uppercased
 //   line 329       the probe row is written last, as the commit record
 //   lines 357-358  contentRowSks writes the same unsuffixed sosId# key
+// entityKey mirrors the state drop at 110-113 but deliberately not the title
+// drop at 106-109 when a sosId is present, since the primary-row key does not
+// contain the title. That case is tested in the entityKey() block above, not
+// pinned here, because the Lambda itself writes nothing for it.
 // If the insert Lambda changes how it builds any of these, entityKey must
 // change with it and these pins must be re-derived. If entityKey drifts on its
 // own, these fail.
