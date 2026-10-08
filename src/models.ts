@@ -150,9 +150,14 @@ export interface IBusiness {
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
     /**
-     * Currently only DE (Delaware)
+     * DE (Delaware) and NJ
      */
     taxAmountDue?: string;
+    /**
+     * DE only since franchise tax may not indicate status for the main report
+     */
+    franchiseTaxStatus?: string;
+    
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */
