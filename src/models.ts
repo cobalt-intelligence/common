@@ -150,9 +150,27 @@ export interface IBusiness {
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
     /**
-     * Currently only DE (Delaware)
+     * DE (Delaware) and NJ
      */
     taxAmountDue?: string;
+    /**
+     * DE only since franchise tax may not indicate status for the main report
+     */
+    franchiseTaxStatus?: string;
+    /** Registered agent standing. Currently only TN */
+    raStanding?: string;
+    /** Currently only TN */
+    otherStanding?: string;
+    /** Department of Revenue standing. Currently only TN */
+    revenueStanding?: string;
+    /** How the LLC is managed (e.g., "Member Managed"). TN and NV */
+    managedBy?: string;
+    /** Whether the LLC is a series LLC ("Yes"/"No"). TN and NV */
+    seriesLlc?: string;
+    /** Currently only TN */
+    numberOfMembers?: string;
+    /** NV specific business ID (e.g., NV20263530270) */
+    nvBusinessId?: string;
 }
 export interface IAssumedBusinessName {
     /** The assumed business name / DBA name */
