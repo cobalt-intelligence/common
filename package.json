@@ -3,6 +3,10 @@
   "version": "1.0.86",
   "description": "Home for common functions and models of Cobalt Intelligence.",
   "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "!dist/**/*.test.*"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
