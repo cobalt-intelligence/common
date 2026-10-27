@@ -4,6 +4,8 @@ export { abbreviateState } from './state';
 export { createUccResponseBody, UCC_RESULT_FOUND, UCC_RESULT_NONE, UCC_RESULT_ERROR } from './ucc';
 export { entityKey, parseEntityKey } from './entityKey';
 export type { EntityKeyInput, ParsedEntityKey } from './entityKey';
+export { createNormalizedStatus, VALID_STATUSES } from './status';
+export type { NormalizedStatus } from './status';
 // Format the business name to remove commas, remove periods, lowercase, and trim white space
 // I know you're looking at that empty replace thinking, what the heck? Why is that there? Do NOT remove it.
 // It's removing invisible delimiters. You can't see them. Invisible.
