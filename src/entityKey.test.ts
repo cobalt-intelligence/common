@@ -1,7 +1,7 @@
 import { entityKey, parseEntityKey, type EntityKeyInput } from './entityKey';
 import { entityKey as exportedEntityKey, parseEntityKey as exportedParseEntityKey } from './index';
 
-// Takes a plain string state, since partitions such as WA_TEST are not in the States enum.
+// Takes a plain string state, since values such as WA_TEST are not in the States enum.
 function biz(state: string | undefined, fields: Omit<EntityKeyInput, 'stateOfSosRegistration'> = {}): EntityKeyInput {
     return { stateOfSosRegistration: state, ...fields };
 }
@@ -43,7 +43,7 @@ const fixtures: Array<{ name: string; input: EntityKeyInput; key: string }> = [
         key: 'WA:sosId#604 753 869'
     },
     {
-        name: 'WA_TEST partition',
+        name: 'state outside the States enum',
         input: biz('WA_TEST', { sosId: '000 000 004', title: 'PIQUNIQ MANAGEMENT CORPORATION' }),
         key: 'WA_TEST:sosId#000 000 004'
     },
@@ -220,8 +220,7 @@ describe('entityKey round trip', () => {
     });
 });
 
-// Expected values follow insert-to-sos-businesses-vXXX src/index.ts.
-describe('entityKey pinned to the insert Lambda key rules', () => {
+describe('entityKey pinned key format', () => {
     const pins: Array<[string, EntityKeyInput, string | null]> = [
         ['numeric sosId', biz('AZ', { sosId: 23395892, title: 'x' }), 'AZ:sosId#23395892'],
         ['numeric zero sosId', biz('AZ', { sosId: 0, title: 'x', normalizedFilingDate: '2020-01-01' }), 'AZ:sosId#0'],
