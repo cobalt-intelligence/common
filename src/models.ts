@@ -1,5 +1,5 @@
 /**
- * This is the format of data returned from sos-search
+ * This is the format of business data returned from a Secretary of State search
  */
 export interface IBusiness {
     /** The name of the business */

@@ -30,7 +30,7 @@ describe('createNormalizedStatus()', () => {
     });
 
     it('should match whole statuses only, not a listed status inside a longer one', () => {
-        expect(createNormalizedStatus('REVIVAL - LEGALLY EXISTING')).toBe('Inactive');
+        expect(createNormalizedStatus('Active - NOT In Good Standing')).toBe('Inactive');
         expect(createNormalizedStatus('Not in good standing')).toBe('Inactive');
     });
 

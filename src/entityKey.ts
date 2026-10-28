@@ -2,7 +2,7 @@ import type { IBusiness } from './models';
 
 /** The fields entityKey reads. sosId also takes a number because some AZ rows store it as one. */
 export type EntityKeyInput = Pick<IBusiness, 'title' | 'normalizedFilingDate'> & {
-    // Widened to string: this helper preserves arbitrary partitions (e.g. WA_TEST) not in the States enum.
+    // Widened to string so state values outside the States enum are kept as sent.
     stateOfSosRegistration?: IBusiness['stateOfSosRegistration'] | string | null;
     sosId?: IBusiness['sosId'] | number | null;
 };
@@ -21,14 +21,14 @@ function stringField(value: unknown): string | undefined {
 }
 
 /**
- * Returns `${state}:${sk}`, where sk is the primary-row sort key the insert-to-sos-businesses
- * Lambda builds for this business, or null when no such key can be built.
+ * Returns `${state}:sosId#${SOSID}`, or `${state}:title#${TITLE}#filingDate#${date}` when there
+ * is no sosId, or null when no such key can be built.
  */
 export function entityKey(business: EntityKeyInput | null | undefined): string | null {
     if (!business) return null;
 
     if (!business.stateOfSosRegistration) return null;
-    // The state is used as sent: the insert Lambda never uppercases or trims it.
+    // The state is used as sent, never uppercased or trimmed.
     const state = String(business.stateOfSosRegistration);
     // parseEntityKey splits on the first ':', so a state containing one could not round trip.
     if (state.includes(':')) return null;
@@ -43,7 +43,7 @@ export function entityKey(business: EntityKeyInput | null | undefined): string |
     if (!filingDate) return null;
 
     if (!business.title) return null;
-    // Uppercased but not trimmed, as the insert Lambda does (unlike the filing date).
+    // Uppercased but not trimmed (unlike the filing date).
     const title = String(business.title).toLocaleUpperCase();
 
     return `${state}:${TITLE_PREFIX}${title}${FILING_DATE_SEPARATOR}${filingDate}`;
