@@ -5,9 +5,6 @@ export type NormalizedStatus = 'Active' | 'Inactive' | 'No status found';
  * Raw statuses that count as Active. Each entry is lowercase, trimmed and single-spaced,
  * because the raw status is normalized that way before the lookup. Anything not listed is
  * Inactive, so a status with a caveat stays Inactive unless it is added here.
- *
- * lambda-sos-search and the bulk loaders (sos-bulk-intake) both import this list, so the
- * status we store and the status search shows come from one place.
  */
 export const VALID_STATUSES: readonly string[] = Object.freeze([
     'active', 'active-current', 'active-existing', 'active-good standing',
@@ -17,7 +14,8 @@ export const VALID_STATUSES: readonly string[] = Object.freeze([
     'a - active', 'restored to good standing', 'good', 'reinstated', 'in use', 'a - active good', 'organized',
     'this business is in good standing', 'effective', 'registered', 'reserved',
     'igs', 'in good standing', // IGS = "In Good Standing" (Wisconsin abbreviation)
-    'legally existing', 'active - registered', 'legacy status - active', 'new corporation', 'perpetual'
+    'legally existing', 'active - registered', 'legacy status - active', 'new corporation', 'perpetual',
+    'revival - legally existing'
 ]);
 
 /**
