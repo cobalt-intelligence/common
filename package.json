@@ -1,6 +1,6 @@
 {
   "name": "cobalt-int-common",
-  "version": "1.0.88",
+  "version": "1.0.89",
   "description": "Home for common functions and models of Cobalt Intelligence.",
   "main": "./dist/index.js",
   "files": [
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && tsc",
-    "prepublish": "npm run build && npm --no-git-tag-version version patch",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "repository": {
