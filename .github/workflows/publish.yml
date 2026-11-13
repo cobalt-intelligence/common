@@ -42,16 +42,22 @@ jobs:
             echo "publish=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # npm refuses to move latest backwards, so a version below the registry's latest (two bumps whose runs
-          # finished out of order) goes out under its own tag and latest stays where it is.
-          LATEST_VERSION=$(npm view "${PACKAGE_NAME}" dist-tags.latest 2> /dev/null || true)
-          LOWER_VERSION=$(printf '%s\n%s\n' "${PACKAGE_VERSION}" "${LATEST_VERSION}" | sort --version-sort | head -n 1)
-          if [ -n "${LATEST_VERSION}" ] && [ "${LOWER_VERSION}" = "${PACKAGE_VERSION}" ]; then
-            DIST_TAG=backfill
-          else
-            DIST_TAG=latest
+          # A release version below the registry's latest (two bumps whose runs finished out of order) goes out
+          # under the backfill tag. Every other publish names no tag, so npm's own checks stay in force: it refuses
+          # to move latest backwards and refuses a prerelease without a tag. A failed lookup stops the run.
+          if ! LATEST_VERSION=$(npm view "${PACKAGE_NAME}" dist-tags.latest); then
+            echo "Could not read the registry's latest version of ${PACKAGE_NAME}; not publishing"
+            exit 1
           fi
-          echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is not on the registry (latest there: ${LATEST_VERSION:-none}); publishing with tag ${DIST_TAG}"
+          RELEASE_VERSION='^[0-9]+\.[0-9]+\.[0-9]+$'
+          DIST_TAG=""
+          if [[ "${PACKAGE_VERSION}" =~ ${RELEASE_VERSION} && "${LATEST_VERSION}" =~ ${RELEASE_VERSION} ]]; then
+            LOWER_VERSION=$(printf '%s\n%s\n' "${PACKAGE_VERSION}" "${LATEST_VERSION}" | sort --version-sort | head -n 1)
+            if [ "${LOWER_VERSION}" = "${PACKAGE_VERSION}" ]; then
+              DIST_TAG=backfill
+            fi
+          fi
+          echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is not on the registry (latest there: ${LATEST_VERSION}); publishing with ${DIST_TAG:-no} tag"
           echo "publish=true" >> "$GITHUB_OUTPUT"
           echo "tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
       - if: steps.version.outputs.publish == 'true'
@@ -60,6 +66,11 @@ jobs:
         run: npm test
       # prepublishOnly builds dist; the package's files list keeps tests out of the tarball.
       - if: steps.version.outputs.publish == 'true'
-        run: npm publish --tag "${DIST_TAG}"
+        run: |
+          if [ -n "${DIST_TAG}" ]; then
+            npm publish --tag "${DIST_TAG}"
+          else
+            npm publish
+          fi
         env:
           DIST_TAG: ${{ steps.version.outputs.tag }}
