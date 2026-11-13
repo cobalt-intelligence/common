@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/cobalt-intelligence/common.git"
+    "url": "git+https://github.com/cobalt-intelligence/common.git"
   },
   "author": "Jordan Hansen",
   "license": "ISC",
