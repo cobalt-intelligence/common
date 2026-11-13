@@ -12,10 +12,12 @@ permissions:
   contents: read
   id-token: write
 
-# One publish at a time; a second merge waits instead of racing the first.
+# One publish at a time. queue: max keeps every waiting run, so a version bump that merges while two others are
+# ahead of it is still published instead of being replaced by the newest one.
 concurrency:
   group: publish-npm
   cancel-in-progress: false
+  queue: max
 
 jobs:
   publish:
