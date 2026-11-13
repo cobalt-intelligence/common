@@ -232,6 +232,79 @@ export interface IOfficer {
     email?: string;
     /** Whether the officer is currently active */
     current?: string;
+    /** Where this officer came from. Absent means 'state', as on every row written before this field existed */
+    source?: OfficerSource;
+    /** The filing this officer was read from. Set only when source is 'filing' */
+    filing?: IOfficerFiling;
+}
+
+/** 'state': the state's own officer list. 'filing': read from a filing document on the state's site */
+export type OfficerSource = 'state' | 'filing';
+
+/** The filing document a parsed officer came from */
+export interface IOfficerFiling {
+    /** The state's id for the document, or its URL when the state gives no id */
+    documentId: string;
+    /** The filing date, ISO 'YYYY-MM-DD' */
+    date?: string;
+    /** The document type as the state names it (e.g. "Statement of Information", "Annual Report") */
+    type?: string;
+}
+
+/** How one filing parse ended */
+export type FilingExtractionOutcome =
+    /** Officers were read and kept */
+    | 'parsed'
+    /** The document names the business but lists no current officer */
+    | 'noOfficers'
+    /** The document names a different business, so nothing from it was kept */
+    | 'entityMismatch'
+    /** The document could not be fetched, or was not a PDF */
+    | 'fetchFailed'
+    /** The document is a scan larger than the model accepts, so it was not sent */
+    | 'documentTooLarge'
+    /** The model call failed or returned an answer that could not be used */
+    | 'modelFailed';
+
+/** One parse of one filing document. Stored on the business row in filingExtractions */
+export interface IFilingExtraction {
+    /** Same as IOfficerFiling.documentId */
+    documentId: string;
+    /** The filing date, ISO 'YYYY-MM-DD' */
+    date?: string;
+    /** The document type as the state names it */
+    type?: string;
+    /** The model id that read the document. Absent when no model call was made */
+    model?: string;
+    /** What the model call cost, in US cents (0 when no call was made) */
+    costCents: number;
+    outcome: FilingExtractionOutcome;
+    /** When the parse ran, ISO timestamp */
+    extractedAt: string;
+    /** 'text' when the document's text layer was sent, 'pdf' when the PDF itself was (a scan) */
+    inputMode?: 'text' | 'pdf';
+    /** Officers kept from this document */
+    officerCount?: number;
+    /** The model's answer exactly as returned, kept for evaluation */
+    rawAnswer?: string;
+    /** Short reason for an outcome other than 'parsed' */
+    detail?: string;
+}
+
+/**
+ * A stored business row: the IBusiness fields plus attributes that live on the row but are not part of a
+ * search response as stored. The read path merges filingOfficers into officers (each with source 'filing')
+ * and leaves filingExtractions out.
+ */
+export interface IBusinessRow extends IBusiness {
+    /**
+     * Officers parsed from the business's most recent filing that lists officers. Only that one document is
+     * parsed, never the filing history. Kept apart from officers so a state refresh never overwrites them
+     * and they never replace a state-provided officer.
+     */
+    filingOfficers?: IOfficer[];
+    /** One record per filing document parsed for this business */
+    filingExtractions?: IFilingExtraction[];
 }
 export interface IDocument {
     /** The document name/title */
