@@ -261,6 +261,8 @@ export type FilingExtractionOutcome =
     | 'entityMismatch'
     /** The document could not be fetched, or was not a PDF */
     | 'fetchFailed'
+    /** The document is a scan larger than the model accepts, so it was not sent */
+    | 'documentTooLarge'
     /** The model call failed or returned an answer that could not be used */
     | 'modelFailed';
 
