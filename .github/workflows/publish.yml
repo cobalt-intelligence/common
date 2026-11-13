@@ -40,14 +40,26 @@ jobs:
           if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version > /dev/null 2>&1; then
             echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is already on the registry; nothing to publish"
             echo "publish=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is not on the registry; publishing"
-            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          # npm refuses to move latest backwards, so a version below the registry's latest (two bumps whose runs
+          # finished out of order) goes out under its own tag and latest stays where it is.
+          LATEST_VERSION=$(npm view "${PACKAGE_NAME}" dist-tags.latest 2> /dev/null || true)
+          LOWER_VERSION=$(printf '%s\n%s\n' "${PACKAGE_VERSION}" "${LATEST_VERSION}" | sort --version-sort | head -n 1)
+          if [ -n "${LATEST_VERSION}" ] && [ "${LOWER_VERSION}" = "${PACKAGE_VERSION}" ]; then
+            DIST_TAG=backfill
+          else
+            DIST_TAG=latest
+          fi
+          echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is not on the registry (latest there: ${LATEST_VERSION:-none}); publishing with tag ${DIST_TAG}"
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          echo "tag=${DIST_TAG}" >> "$GITHUB_OUTPUT"
       - if: steps.version.outputs.publish == 'true'
         run: npm ci
       - if: steps.version.outputs.publish == 'true'
         run: npm test
       # prepublishOnly builds dist; the package's files list keeps tests out of the tarball.
       - if: steps.version.outputs.publish == 'true'
-        run: npm publish
+        run: npm publish --tag "${DIST_TAG}"
+        env:
+          DIST_TAG: ${{ steps.version.outputs.tag }}
