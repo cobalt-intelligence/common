@@ -1,5 +1,5 @@
 export { States, Status } from './models';
-export type { IBusiness, IAddress, IOfficer, IDocument, IUCCData, IDebtor, ISecuredParty, IResponseBody, IAssumedBusinessName, IUccResult, IUccResponseBody } from './models';
+export type { IBusiness, IAddress, IOfficer, IDocument, IUCCData, IDebtor, ISecuredParty, IResponseBody, IAssumedBusinessName, IUccResult, IUccResponseBody, IncludeName, IOfacScreening, ITinVerification } from './models';
 export { abbreviateState } from './state';
 export { createUccResponseBody, UCC_RESULT_FOUND, UCC_RESULT_NONE, UCC_RESULT_ERROR } from './ucc';
 export { entityKey, parseEntityKey } from './entityKey';

@@ -149,6 +149,18 @@ export interface IBusiness {
     screenshotSucceeded?: boolean;
     /** Whether UCC data was successfully retrieved (returned when uccData=true is requested; no extra charge on failure) */
     uccSucceeded?: boolean;
+    /** OFAC screening of the SOS legal name (returned when include=ofac was requested and ofacSucceeded is true) */
+    ofac?: IOfacScreening;
+    /** Whether the OFAC screening ran (returned whenever include=ofac was requested) */
+    ofacSucceeded?: boolean;
+    /** Why the OFAC screening did not run, when ofacSucceeded is false */
+    ofacMessage?: string;
+    /** IRS TIN/name match of the tin sent against the SOS legal name (returned when include=tin was requested and tinSucceeded is true) */
+    tinVerification?: ITinVerification;
+    /** Whether the TIN verification ran (returned whenever include=tin was requested) */
+    tinSucceeded?: boolean;
+    /** Why the TIN verification did not run, when tinSucceeded is false (for example an invalid TIN) */
+    tinMessage?: string;
     /**
      * DE (Delaware) and NJ
      */
@@ -188,6 +200,38 @@ export interface IAssumedBusinessName {
     /** Whether this is a joint venture */
     jointVenture?: boolean;
 }
+/** A verification that can ride along with a Secretary of State search (`include=ucc,ofac,tin`) when the account's plan carries it */
+export type IncludeName = 'ucc' | 'ofac' | 'tin';
+/** One OFAC screening, as returned under `ofac` on a business when include=ofac succeeded */
+export interface IOfacScreening {
+    /** The name that was screened (the SOS legal name) */
+    name?: string;
+    /** How many sanctions-list entries matched at or above the requested score */
+    matchCount: number;
+    /** The matching entries, at most 30 */
+    matches?: unknown[];
+    /** Set to "No results found." when matchCount is 0 */
+    message?: string;
+}
+/** One IRS TIN/name match, as returned under `tinVerification` on a business when include=tin succeeded */
+export interface ITinVerification {
+    /** The business name that was sent to the IRS match (the SOS legal name, at most 40 characters) */
+    name: string;
+    /** The TIN that was matched, masked to its last four digits */
+    tin: string;
+    /** 'Pending' | 'TIN Matched' | 'Did Not Match', or 'Complete' for an unrecognized IRS answer */
+    status: string;
+    /** The IRS result code */
+    irsCode: number;
+    /** The IRS result text */
+    irsReason: string;
+    /** Kept for back-compat; always empty */
+    irsServiceStatus: string;
+    /** Kept for back-compat; always empty */
+    lastIRSCheckDate: string;
+    /** Set when the business name was truncated to 40 characters before matching */
+    message?: string;
+}
 // A real enum, not `declare`: `declare enum` emits no JavaScript, so `Status` was undefined at runtime
 // for every consumer even though index.ts re-exported it.
 export enum Status {
@@ -212,6 +256,8 @@ export interface IResponseBody {
     alternativeResults?: any[];
     /** Webhook callback information for async requests */
     callbackData?: ICallbackData;
+    /** The include= bundle this request asked for; each include's outcome sits on results[0] (ofacSucceeded, tinSucceeded, uccSucceeded) */
+    include?: IncludeName[];
 }
 export interface IOfficer {
     /** The officer's full name */
