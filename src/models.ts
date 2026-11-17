@@ -200,7 +200,7 @@ export interface IAssumedBusinessName {
     /** Whether this is a joint venture */
     jointVenture?: boolean;
 }
-/** A verification that can ride along with a Secretary of State search (`include=ucc,ofac,tin`) when the account's plan carries it */
+/** A verification that can ride along with a Secretary of State search (`include=ucc,ofac,tin`). One the account's plan carries is free with the search; the rest still run and are billed at their standalone rate when they succeed */
 export type IncludeName = 'ucc' | 'ofac' | 'tin';
 /** One OFAC screening, as returned under `ofac` on a business when include=ofac succeeded */
 export interface IOfacScreening {
