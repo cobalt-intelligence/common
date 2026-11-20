@@ -166,7 +166,9 @@ export interface IBusiness {
      */
     taxAmountDue?: string;
     /**
-     * DE only since franchise tax may not indicate status for the main report
+     * DE (Delaware) and TX (Texas).
+     * DE: the Division of Corporations' franchise tax status, which may not indicate status for the main report.
+     * TX: the Comptroller's "right to transact business" value; when it is not Active, normalizedStatus is Inactive.
      */
     franchiseTaxStatus?: string;
     /** Registered agent standing. Currently only TN */

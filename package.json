@@ -1,6 +1,6 @@
 {
   "name": "cobalt-int-common",
-  "version": "1.0.92",
+  "version": "1.0.93",
   "description": "Home for common functions and models of Cobalt Intelligence.",
   "main": "./dist/index.js",
   "files": [
