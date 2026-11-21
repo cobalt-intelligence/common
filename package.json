@@ -31,5 +31,10 @@
     "jest": "^30.3.0",
     "ts-jest": "^29.4.6",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "babel-plugin-istanbul": "^8.0.2",
+    "glob": "^14.0.3",
+    "minimatch": "^11.0.3"
   }
 }
